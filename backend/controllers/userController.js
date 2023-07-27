@@ -7,25 +7,31 @@ import User from "../models/userModel.js";
 // @access Public
 
 const  authUser = asyncHandler(async (req, res) => {
-    const {email , password} = req.body;
-    console.log({email});
+    const {email, password } = req.body;
+    console.log(req.body)
+
+    console.log(email)
+  
+ 
+
+
 
     const user = await User.findOne({ email });
-    // console.log({email});
+  
 
 
-    // if(user) {
-    //     res.json({
-    //         _id: user._id,
-    //         name: user.name,
-    //         email: user.email,
-    //         isAdmin: user.isAdmin,
-    //     });
-    // } else {
-    //     res.status(401);
-    //     throw new Error('Invalid email or password');
-    //     console.log( email)
-    // }
+    if(user) {
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+        });
+    } else {
+        res.status(401);
+        throw new Error('Invalid email or password');
+        console.log( email)
+    }
 
     res.send('auth user');
 });
