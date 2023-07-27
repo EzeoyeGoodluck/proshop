@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector, useDispatch } from "react-redux";
 import {
   Row,
   Col,
@@ -13,10 +13,26 @@ import {
 } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
 import Message from "../components/Message";
+import { addToCart, removeFromCart } from "../slices/cartSlice";
+
+
 
 const CartScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const addToCartHandler = async (product, qty) => {
+    dispatch(addToCart({...product,qty}))
+}
+
+const removeFromCartHandler = async (id) => {
+    dispatch(removeFromCart(id));
+}
+
+const checkOutHandler = () => {
+    navigate('/login?redirect=/shipping');
+}
+
 
   const cart = useSelector((state) => state.cart);
 
@@ -46,7 +62,7 @@ const CartScreen = () => {
                     <Form.Control
                       as='select'
                       value={item.qty}
-                      onChange={(e) => {}}>
+                      onChange={(e) => addToCartHandler(item, Number(e.target.value))}>
                         {[...Array(item.countInStock).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
                             {x + 1}
@@ -55,7 +71,7 @@ const CartScreen = () => {
                       </Form.Control>
                     </Col>
                     <Col md={2}>
-                        <Button type="button" varient='light'>
+                        <Button type="button" varient='light'onClick={()=>removeFromCartHandler(item._id)} >
                             <FaTrash />
                         </Button>
                     </Col>
@@ -76,7 +92,9 @@ const CartScreen = () => {
                     ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2) }
                 </ListGroup.Item>
                 <ListGroup.Item>
-                    <Button type='button' className="btn-block" disabled={ cartItems.length === 0}>
+                    <Button type='button' className="btn-block" disabled={ cartItems.length === 0}
+                    onClick={checkOutHandler}
+                    >
                         Proceed To Checkout
                     </Button>
                 </ListGroup.Item>
