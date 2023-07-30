@@ -96,7 +96,7 @@ const checkOutHandler = () => {
                     onClick={checkOutHandler}
                     >
                         Proceed To Checkout
-                    </Button>
+                    </Button> 
                 </ListGroup.Item>
             </ListGroup>
         </Card> 
