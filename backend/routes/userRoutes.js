@@ -1,25 +1,30 @@
 import express from "express";
 const router = express.Router();
-// import asyncHandler from '../middleware/asyncHandler.js';
-// import Product from '../models/productModel.js';
 import {
-    authUser,
-    registerUser,
-    logoutUser,
-    getUserProfile,
-    updateUserProfile,
-    getUsers,
-    deleteUsers,
-    getUserByID,
-    updateUser, 
-} from '../controllers/userController.js';
+  authUser,
+  registerUser,
+  logoutUser,
+  getUserProfile,
+  updateUserProfile,
+  getUsers,
+  deleteUsers,
+  getUserByID,
+  updateUser,
+} from "../controllers/userController.js";
+import { protect, admin } from "../middleware/authMiddleware.js";
 
+router.route("/").post(registerUser).get(protect, admin, getUsers);
+router.post("/logout", logoutUser);
+router.post("/login", authUser);
+router
+  .route("/profile")
+  .get(protect, getUserProfile)
+  .put(protect, updateUserProfile);
 
-router.route('/').post(registerUser).get(getUsers);
-router.post('/logout', logoutUser);
-router.post('/login', authUser);
-router.route('/profile').get(getUserProfile).put(updateUserProfile);
-router.route('/:id').delete(deleteUsers).get(getUserByID).put(updateUser);
-
+router
+  .route("/:id")
+  .delete(protect, admin, deleteUsers)
+  .get(protect, admin, getUserByID)
+  .put(protect, admin, updateUser);
 
 export default router;

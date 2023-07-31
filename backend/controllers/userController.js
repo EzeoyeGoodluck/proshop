@@ -60,14 +60,22 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password,
   });
+
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+}else{
+    res.status(400);
+    throw new Error('Invalid user data');
+}
 });
 
-if (user) {
-  res.status(201).json({
-    _id: user._id,
-    name: user.name,
-  })
-}
+
+
 
 // @desc  Logout user
 // @route POST /api/products
