@@ -15,11 +15,18 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { logoutApiCall} = useLogoutMutation();
+  const [logoutApiCall] = useLogoutMutation();
 
 
-  const logoutHandler = () =>{
-    console.log('logout')
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate('/login');
+    }catch(err){
+      console.log(err);
+    } 
+   
   }
 
 
