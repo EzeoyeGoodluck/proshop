@@ -28,13 +28,16 @@ const ShippingScreen = () => {
         e.preventDefault();
         dispatch(saveShippingAddress({ address, city, postalCode, country}));
         navigate('/payment');
-    }
+    };
+
+
+ 
   return (
     <FormContainer>
         <CheckoutSteps step1 step2 />
         <h1>Shipping</h1>
         <Form onSubmit={submitHandler}>
-            <Form.Group controlled='address' className="my-2">
+            <Form.Group controlId='address' className="my-2">
                 <Form.Label>Address</Form.Label>
                 <Form.Control
                 type='text'
@@ -45,7 +48,7 @@ const ShippingScreen = () => {
                 </Form.Control>
             </Form.Group>
 
-            <Form.Group controlled='city' className="my-2">
+            <Form.Group controlId='city' className="my-2">
                 <Form.Label>City</Form.Label>
                 <Form.Control
                 type='text'
@@ -56,10 +59,10 @@ const ShippingScreen = () => {
                 </Form.Control>
             </Form.Group>
 
-            <Form.Group controlled='postalCode' className="my-2">
+            <Form.Group controlId='postalCode' className="my-2">
                 <Form.Label>Postal Code</Form.Label>
                 <Form.Control
-                type='text'
+                type='number'
                 placeholder="Enter Postal Code"
                 value={postalCode}
                 onChange={(e) => setPostalCode(e.target.value)}
@@ -68,7 +71,7 @@ const ShippingScreen = () => {
             </Form.Group>
 
             
-            <Form.Group controlled='country' className="my-2">
+            <Form.Group controlId='country' className="my-2">
                 <Form.Label>Country</Form.Label>
                 <Form.Control
                 type='text'
