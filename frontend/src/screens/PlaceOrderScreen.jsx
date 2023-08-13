@@ -21,6 +21,15 @@ const PlaceOrderScreen = () => {
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
 
+  const [createOrder, { isLoading, error}] = useCreateOrderMutation();
+
+
+  const placeOrderHandler = async () => {
+    
+  }
+
+
+
   useEffect(() => {
     if (!cart.shippingAddress.address) {
       navigate("/shipping");
@@ -65,6 +74,14 @@ const PlaceOrderScreen = () => {
                             rounded
                           />
                         </Col>
+                        <Col>
+                        <Link to={`/products/${item.product}`}>
+                            {item.name}
+                        </Link>
+                        </Col>
+                        <Col md={4}>
+                            {item.qty}  x ${item.price} = ${item.qty * item.price}
+                        </Col>
                       </Row>
                     </ListGroup.Item>
                   ))}
@@ -73,7 +90,67 @@ const PlaceOrderScreen = () => {
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={4}>col</Col>
+        <Col md={4}>
+            <Card>
+                <ListGroup variant="flush">
+                    <ListGroup.Item>
+                        <h2>Order Summary</h2>
+                    </ListGroup.Item>
+                    <ListGroup.Item> 
+                        <Row>
+                            <Col>Items:</Col>
+                            <Col>
+                            ${cart.itemsPrice}
+                            </Col>
+                        </Row>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item> 
+                        <Row>
+                            <Col>Shipping:</Col>
+                            <Col>
+                            ${cart.shippingPrice}
+                            </Col>
+                        </Row>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item> 
+                        <Row>
+                            <Col>Tax:</Col>
+                            <Col>
+                            ${cart.taxPrice}
+                            </Col>
+                        </Row>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item> 
+                        <Row>
+                            <Col>Total:</Col>
+                            <Col>
+                            ${cart.totalprice}
+                            </Col>
+                        </Row>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item>
+
+                      { error && <Message varient='danger'>{error}</Message>  }
+                    </ListGroup.Item>
+
+
+                    <ListGroup.Item> 
+                        <Button type="button" 
+                        className ='btn-block'
+                        disabled={cart.cartItems.length === 0}
+                        onClick={placeOrderHandler}
+                        >
+                            Place Order
+                        </Button>
+        
+                    </ListGroup.Item>
+                </ListGroup>
+            </Card>
+        </Col>
       </Row>
     </>
   );
