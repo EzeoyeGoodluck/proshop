@@ -5,6 +5,13 @@ import Loader from '../components/Loader';
 import { useGetOrderDetailsQuery } from '../slices/ordersApiSlice';
 
 const OrderScreen = () => {
+    const { id: orderId } = useParams();
+
+    const { data:order, isLoading, iserror, refetch } = useGetOrderDetailsQuery(orderId);
+    console.log(order + 'order');
+    // console.log(orderId)
+
+
   return (
     <div>
         Order screen
