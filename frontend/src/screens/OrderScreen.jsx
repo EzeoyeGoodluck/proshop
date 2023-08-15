@@ -1,15 +1,14 @@
 import { Link, useParams} from 'react-router-dom';
-import { Row, Col, ListGrup, Image, Form, Button, Card } from 'react-bootstrap';
+import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { useGetOrderDetailsQuery } from '../slices/ordersApiSlice';
 
 const OrderScreen = () => {
-    const { id: orderId } = useParams();
+    const { id } = useParams();
 
-    const { data:order, isLoading, iserror, refetch } = useGetOrderDetailsQuery(orderId);
-    console.log(order + 'order');
-    // console.log(orderId)
+    const { data, isLoading, iserror, refetch } = useGetOrderDetailsQuery(id);
+    console.log(data );
 
 
   return (
