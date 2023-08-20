@@ -79,6 +79,7 @@ const getOrderById = asyncHandler(async (req, res) => {
 
 const updateOrderToPaid= asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
+    console.log(order)
 
 
     if(order){
@@ -90,6 +91,8 @@ const updateOrderToPaid= asyncHandler(async (req, res) => {
             update_time: req.body.update_time,
             email_address: req.body.payer.email_address,
         };
+
+   
 
         const updateOrder = await order.save();
 

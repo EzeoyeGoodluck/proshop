@@ -16,6 +16,8 @@ import {
 const OrderScreen = () => {
   const { id: orderId } = useParams();
 
+  console.log(orderId)
+
   const {
     data: order,
     refetch,
@@ -61,7 +63,7 @@ const OrderScreen = () => {
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
       try {
-        await payOrder({ orderId, details });
+        await payOrder({orderId, details});
         refetch();
         toast.success('Order is paid');
       } catch (err) {
@@ -69,6 +71,7 @@ const OrderScreen = () => {
       }
     });
   }
+
 
   // TESTING ONLY! REMOVE BEFORE PRODUCTION
   async function onApproveTest() {
