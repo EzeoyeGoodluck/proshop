@@ -99,10 +99,20 @@ const OrderScreen = () => {
       });
   }
 
+  // const deliverHandler = async () => {
+  //   await deliverOrder(orderId);
+  //   refetch();
+  // };
+
   const deliverHandler = async () => {
-    await deliverOrder(orderId);
-    refetch();
-  };
+    try{
+      await deliverOrder(orderId);
+      refetch();
+      toast.success('order delivered');
+    }catch (err){
+      toast.err(err?.data?.message || err.message);
+    }
+  }
 
   return isLoading ? (
     <Loader />

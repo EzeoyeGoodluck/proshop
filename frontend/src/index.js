@@ -25,6 +25,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import ProductListScreen from "./screens/admin/ProductListScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
 
       <Route path="" element={<AdminRoute/>}>
         <Route path="/admin/orderlist" element={<OrderListScreen />} />
+        <Route path="/admin/productlistscreen" element={<ProductListScreen />} />
       </Route>
     </Route>
   )
