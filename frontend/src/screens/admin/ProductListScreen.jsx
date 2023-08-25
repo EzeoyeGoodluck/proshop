@@ -10,7 +10,9 @@ const ProductListScreen = () => {
     const { data: products, isLoading, error } = useGetProductsQuery();
     console.log(products)
 
-    const  deleteHandler = () => {}
+    const  deleteHandler = (id) => {
+        console.log('delete', id)
+    }
   return (
     <>
     <Row className="align-items-center">
@@ -50,7 +52,7 @@ const ProductListScreen = () => {
                             </LinkContainer>
                             <Button variant="danger" className="btn-sm"
                             onClick={()=> deleteHandler(product._id)}>
-                                <FaTrash />
+                                <FaTrash style={{color: 'white'}} />
                             </Button>
 
                         </td>
