@@ -12,7 +12,7 @@ import "./assets/styles/bootstrap.custom.css";
 import App from "./App";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
-import OrderListScreen from "./screens/OrderListScreen";
+import OrderListScreen from "./screens/admin/OrderListScreen";
 import CartScreen from "./screens/CartScreen";
 import AdminRoute from "./components/AdminRoute";
 import LoginScreen from "./screens/LoginScreen";
