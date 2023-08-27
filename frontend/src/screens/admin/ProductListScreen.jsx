@@ -17,15 +17,13 @@ const ProductListScreen = () => {
     const { data: products, isLoading, error, refetch } = useGetProductsQuery();
     
     const createProductHandler =  async () => {
-        if(window.confirm('Are you sure you want to creatr new product?')){
+        if(window.confirm('Are you sure you want to create new product?')){
 
             try{
                 await crateProduct();
                 refetch();
-            }catch(error){
-                toast.error(error.message);
-                
-
+            }catch(err){
+                toast.error(err?.data?.message || err.error);
             }
 
         }
@@ -48,6 +46,8 @@ const ProductListScreen = () => {
             </Button>
         </Col>
     </Row>
+
+    {loadingCreate && <loader /> }
     {isLoading ? <Loader /> : error ? <Message variant='danger'> {error}</Message> : (
         <>
         <Table striped hover responsive className="table-sm">
