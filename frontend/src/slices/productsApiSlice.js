@@ -17,9 +17,9 @@ export const productsApiSlice = apiSlice.injectEndpoints({
             keepUnusedDataFor: 5
         }),
         createProduct: builder.mutation({
-            query: (newProduct) => ({
+            query: () => ({
                 url: PRODUCTS_URL,
-                methodd: 'POST',
+                method: 'POST',
             }),
             invalidatesTags: ['product'],
         })
