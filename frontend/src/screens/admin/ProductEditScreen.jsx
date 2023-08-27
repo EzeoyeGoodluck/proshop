@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
-import { taost } from "react-toastify";
+import {  toast } from "react-toastify";
 import {
   useUpdateProductMutation,
   useGetProductsDetailsQuery,
@@ -49,8 +49,8 @@ const ProductEditScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const updateProduct = {
-        _id: productId,
+    const updatedProduct = {
+        productId,
         name,
         price,
         image,
@@ -59,6 +59,14 @@ const ProductEditScreen = () => {
         countInStock,
         description,
     };
+
+    const result = await updateProduct(updatedProduct)
+    if (result.error) {
+        toast.error(result.error);
+    } else {
+        toast.success('Product updated');
+        navigate('/admin/productlistscreen');
+    }
 
   }
 
