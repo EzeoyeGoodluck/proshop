@@ -12,20 +12,18 @@ import { useGetProductsQuery, useCreateProductMutation } from "../../slices/prod
 
 const ProductListScreen = () => {
 
-    const [crateProduct, { isLoading: loadingCreate } ] = useCreateProductMutation();
+    const [createProduct, { isLoading: loadingCreate } ] = useCreateProductMutation();
 
     const { data: products, isLoading, error, refetch } = useGetProductsQuery();
     
     const createProductHandler =  async () => {
         if(window.confirm('Are you sure you want to create new product?')){
-
             try{
-                await crateProduct();
+                await createProduct();
                 refetch();
             }catch(err){
                 toast.error(err?.data?.message || err.error);
             }
-
         }
     }
     
