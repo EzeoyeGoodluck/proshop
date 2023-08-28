@@ -7,6 +7,7 @@ import {  toast } from "react-toastify";
 import {
   useUpdateProductMutation,
   useGetProductsDetailsQuery,
+  useUploadProductImageMutation
 } from "../../slices/productsApiSlice";
 import FormContainer from "../../components/FormContainer";
 
@@ -29,6 +30,8 @@ const ProductEditScreen = () => {
   } = useGetProductsDetailsQuery(productId);
 
   const [ updateProduct,  {isLoading: loadingUpdate}] = useUpdateProductMutation();
+
+  const [ uploadProductImage, { isLoading: loadingUpload  } ] = useUploadProductImageMutation()
 
   const navigate = useNavigate();
 
@@ -97,7 +100,17 @@ const ProductEditScreen = () => {
                 onChange={(e) => setPrice(e.target.value)}></Form.Control>
             </Form.Group>
 
-            {/* IMAGE INPUT PLACEHOLDER */}
+
+            <Form.Group controlId="image" className="my-2">
+                <Form.Label>Image</Form.Label>
+                <Form.Control type='text' placeholder='Enter image url'
+                value={image} onChange={(e) => setImage}>
+
+                </Form.Control>
+             
+            </Form.Group>
+
+            
 
             <Form.Group controlId="brand" className="my-2">
                 <Form.Label>Brand</Form.Label>
