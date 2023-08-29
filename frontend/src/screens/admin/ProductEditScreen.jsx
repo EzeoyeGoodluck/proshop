@@ -105,9 +105,7 @@ const ProductEditScreen = () => {
                 <Form.Label>Image</Form.Label>
                 <Form.Control type='text' placeholder='Enter image url'
                 value={image} onChange={(e) => setImage}>
-
                 </Form.Control>
-             
             </Form.Group>
 
             
