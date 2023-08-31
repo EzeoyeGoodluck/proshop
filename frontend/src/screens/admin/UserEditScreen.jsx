@@ -6,10 +6,12 @@ import Loader from "../../components/Loader";
 import {  toast } from "react-toastify";
 
 
-import { useGetProductsDetailsQuery } from "../../slices/productsApiSlice";
+
+
+import { useGetUserDetailsQuery, useUpdateUserMutation } from "../../slices/usersApiSlice";
 
 import FormContainer from "../../components/FormContainer";
-import { FaLaptopHouse } from "react-icons/fa";
+
 
 const UserEditScreen = () => {
   const { id: userId } = useParams();
@@ -24,7 +26,7 @@ const UserEditScreen = () => {
     isLoading,
     refetch,
     error,
-  } = useGetUsersDetailsQuery(userId);
+  } = useGetUserDetailsQuery(userId);
 
   const [ updateUser,  {isLoading: loadingUpdate}] = useUpdateUserMutation();
 
