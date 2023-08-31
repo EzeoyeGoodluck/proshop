@@ -4,11 +4,10 @@ import { Form, Button } from "react-bootstrap";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import {  toast } from "react-toastify";
-import {
-  useUpdateUserMutation,
-  useGetUsersDetailsQuery,
 
-} from "../../slices/usersApiSlice";
+
+import { useGetProductsDetailsQuery } from "../../slices/productsApiSlice";
+
 import FormContainer from "../../components/FormContainer";
 import { FaLaptopHouse } from "react-icons/fa";
 
@@ -25,7 +24,7 @@ const UserEditScreen = () => {
     isLoading,
     refetch,
     error,
-  } = useGetUsersDetailsQuery(productId);
+  } = useGetUsersDetailsQuery(userId);
 
   const [ updateUser,  {isLoading: loadingUpdate}] = useUpdateUserMutation();
 
@@ -76,56 +75,13 @@ const UserEditScreen = () => {
             </Form.Group>
 
 
-            <Form.Group controlId="image" className="my-2">
-                <Form.Label>Image</Form.Label>
-                <Form.Control type='text' placeholder='Enter image url'
-                value={image} onChange={(e) => setImage}>
-                </Form.Control>
-                <Form.Control type="file" label='choose file'
-                onChange={ uploadFileHandler  }>
-
-                </Form.Control>
-            </Form.Group>
+       
 
             
 
-            <Form.Group controlId="brand" className="my-2">
-                <Form.Label>Brand</Form.Label>
-                <Form.Control
-                type='text'
-                placeholder="Enter brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}></Form.Control>
-            </Form.Group>
 
-            <Form.Group controlId="countInStock" className="my-2">
-                <Form.Label>Count In Stock</Form.Label>
-                <Form.Control
-                type='number'
-                placeholder="Enter brand"
-                value={countInStock}
-                onChange={(e) => setCountInStock(e.target.value)}></Form.Control>
-            </Form.Group>
 
-            
-            <Form.Group controlId="catogory" className="my-2">
-                <Form.Label>Count In Stock</Form.Label>
-                <Form.Control
-                type='text'
-                placeholder="Enter brand"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}></Form.Control>
-            </Form.Group>
-
-            
-            <Form.Group controlId="description" className="my-2">
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                type='text'
-                placeholder="Enter description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}></Form.Control>
-            </Form.Group>
+         
 
             <Button
             type="submit"
