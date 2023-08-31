@@ -44,33 +44,16 @@ const UserEditScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const updatedProduct = {
-        productId,
-        name,
-        price,
-        image,
-        brand,
-        category,
-        countInStock,
-        description,
-    };
-
-    const result = await updateProduct(updatedProduct)
-    if (result.error) {
-        toast.error(result.error);
-    } else {
-        toast.success('Product updated');
-        navigate('/admin/productlistscreen');
-    }
-
+    console.log('submit');
+   
   }
 
   return <>
-  <Link to="/admin/productListScreen" className="btn btn-light my-3">
+  <Link to="/admin/userlist" className="btn btn-light my-3">
     Go Back
   </Link>
   <FormContainer>
-    <h1>Edit Product</h1>
+    <h1>Edit User</h1>
     {loadingUpdate && <loader /> }
     {isLoading ? <Loader /> : error ? <Message variant='danger' >{error}</Message> : (
         <Form onSubmit={ submitHandler }>
@@ -83,13 +66,13 @@ const UserEditScreen = () => {
                 onChange={(e) => setName(e.target.value)}></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="price" className="my-2">
+            <Form.Group controlId="email" className="my-2">
                 <Form.Label>Price</Form.Label>
                 <Form.Control
-                type='number'
-                placeholder="Enter price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}></Form.Control>
+                type='email'
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}></Form.Control>
             </Form.Group>
 
 
