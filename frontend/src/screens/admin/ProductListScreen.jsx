@@ -3,6 +3,7 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   useGetProductsQuery,
@@ -12,12 +13,16 @@ import {
 
 
 const ProductListScreen = () => {
+  const { pageNumber }= useParams();
+
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation();
 
  const [deleteProduct, {isLoading: loadingDelete }] = useDeleteProductMutation();   
 
-  const { data: products, isLoading, error, refetch } = useGetProductsQuery();
+  const { data, isLoading, error, refetch } = useGetProductsQuery({
+    pageNumber
+  });
 
   const createProductHandler = async () => {
     if (window.confirm("Are you sure you want to create new product?")) {
@@ -76,7 +81,7 @@ const ProductListScreen = () => {
               <th></th>
             </thead>
             <tbody>
-              {products.map((product) => (
+              {data.products.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
