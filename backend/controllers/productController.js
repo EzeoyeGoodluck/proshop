@@ -98,6 +98,28 @@ const deleteProduct = asyncHandler(async (req, res) => {
  
     }
  });
+
+ // @desc Create  a review
+// @route POST /api/products/:id/reviews
+// @access Private
+
+const createdProductReview = asyncHandler(async (req, res) => {
+
+    const { rating, comment } = req.body;
+
+    const product = await Product.findById(req.params.id);
+
+ 
+    if(product){
+        await Product.deleteOne({ _id: product._id});
+        res.status(200).json({message: 'product deleted' });
+    } else{
+     res.status(404);
+     throw new Error('Resource not found');
+ 
+    }
+ });
+ 
  
  
 
