@@ -39,13 +39,20 @@ const UserEditScreen = () => {
         setEmail(user.email);
         setIsAdmin(user.isAdmin);
     }
-
   }, [user]);
 
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log('submit');
+    try {
+      await updateUser({ userId, name, email, isAdmin });
+      toast.success('User updated successfully');
+      refetch();
+      navigate('/admin/userlist');
+    } catch(err){
+      toast.error(err.data?.message || err.error );
+    }
+  
    
   }
 
@@ -76,15 +83,15 @@ const UserEditScreen = () => {
                 onChange={(e) => setEmail(e.target.value)}></Form.Control>
             </Form.Group>
 
+            <Form.Group controlId="isAdmin" className="my-2">
+              <Form.Check
+              type="checkbox"
+              label="Is Admin"
+              checked={isAdmin}
+              onChange={(e)=> setIsAdmin(e.target.checked)} >
 
-       
-
-            
-
-
-
-         
-
+              </Form.Check>
+            </Form.Group>
             <Button
             type="submit"
             variant="primary"
